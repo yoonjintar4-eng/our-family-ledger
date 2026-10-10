@@ -27,9 +27,9 @@ jobs:
           origin = 'https://our-family-ledger.yoonjintar0.chatgpt.site/'
           expected = {
           'index.html': '81503cb5231279b3c201cf5fc43bc38ac8275ac1a01b3856301d4745d8a9a231',
-          'app.css': '22965c7e1778634670339e6afdf0105779f79f4da82a555618b7473ef612cde6',
+          'app.css': '04b0d4f2ab2627cee970c496a7dd721fe6c4929ffab1da26b55f53ed3302c566',
           'ledger-view.js': 'd9cf48a6243b75998cc3c981f54105ca13e8332e02150cb4756cf51eb7ee2b14',
-          'cloud-runtime.js': '7fe44e8b425e83045cfb20f59ff5663a23e7e42444919feb434fa6a7f0303826',
+          'cloud-runtime.js': 'be00ffead0552f76774bd49d0521f8625ac7e6c88386ff6d00cdbfe3c4d47fa7',
           'vendor/zip-legacy.min.js': 'f33b9b002df919f908d571038f06f773722f8ec73b6e2e3b6937f1f28c7931b1',
           'vendor/zip.LICENSE': '1b7ebc8d7889ed25491484ab2b102370742ca6c0b26650a0c62cc2269b579b84',
           }
