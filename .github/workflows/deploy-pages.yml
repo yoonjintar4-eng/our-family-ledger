@@ -1,0 +1,53 @@
+name: Deploy family ledger
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Download verified application assets
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          from urllib.request import urlopen
+          origin = 'https://our-family-ledger.yoonjintar0.chatgpt.site/'
+          expected = {
+          'index.html': '81503cb5231279b3c201cf5fc43bc38ac8275ac1a01b3856301d4745d8a9a231',
+          'app.css': '22965c7e1778634670339e6afdf0105779f79f4da82a555618b7473ef612cde6',
+          'ledger-view.js': 'd9cf48a6243b75998cc3c981f54105ca13e8332e02150cb4756cf51eb7ee2b14',
+          'cloud-runtime.js': '7fe44e8b425e83045cfb20f59ff5663a23e7e42444919feb434fa6a7f0303826',
+          'vendor/zip-legacy.min.js': 'f33b9b002df919f908d571038f06f773722f8ec73b6e2e3b6937f1f28c7931b1',
+          'vendor/zip.LICENSE': '1b7ebc8d7889ed25491484ab2b102370742ca6c0b26650a0c62cc2269b579b84',
+          }
+          for name, checksum in expected.items():
+              with urlopen(origin + name, timeout=30) as response:
+                  content = response.read(2000000)
+              if hashlib.sha256(content).hexdigest() != checksum:
+                  raise RuntimeError('Application asset verification failed: ' + name)
+              target = Path('_site') / name
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_bytes(content)
+          Path('_site/.nojekyll').write_text('')
+          print('Verified application assets only; financial records are not bundled.')
+          PY
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
