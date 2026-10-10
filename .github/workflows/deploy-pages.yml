@@ -21,10 +21,11 @@ jobs:
         shell: bash
         run: |
           python3 - <<'PY'
-          import hashlib
+          import hashlib, base64
           from pathlib import Path
           from urllib.request import urlopen
           origin = 'https://our-family-ledger.yoonjintar0.chatgpt.site/'
+          embedded_index = base64.b64decode('PCFkb2N0eXBlIGh0bWw+CjxodG1sIGxhbmc9ImtvIj48aGVhZD48bWV0YSBjaGFyc2V0PSJ1dGYtOCI+PG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCxpbml0aWFsLXNjYWxlPTEsdmlld3BvcnQtZml0PWNvdmVyIj48bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVNlY3VyaXR5LVBvbGljeSIgY29udGVudD0iZGVmYXVsdC1zcmMgJ3NlbGYnOyBzY3JpcHQtc3JjICdzZWxmJyBodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQgJ3NoYTI1Ni11ZVQwWlZQbEFLMjRkWFUzcS9sY0xVeGlIV29RRWxsNitLN2hxa0JWcUdrPSc7IHN0eWxlLXNyYyAnc2VsZicgJ3Vuc2FmZS1pbmxpbmUnOyBjb25uZWN0LXNyYyAnc2VsZicgaHR0cHM6Ly9kbHVua2dma21seGR6em9xc3R4ei5zdXBhYmFzZS5jbzsgaW1nLXNyYyAnc2VsZicgZGF0YTo7IGZvbnQtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ3NlbGYnOyI+PHRpdGxlPuyasOumrOynkSDqsIDqs4TrtoA8L3RpdGxlPjxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iYXBwLmNzcyI+PHNjcmlwdD53aW5kb3cuRkFNSUxZX0xFREdFUl9DT05GSUc9eyJ1cmwiOiJodHRwczovL2RsdW5rZ2ZrbWx4ZHp6b3FzdHh6LnN1cGFiYXNlLmNvIiwicHVibGlzaGFibGVLZXkiOiJzYl9wdWJsaXNoYWJsZV9PYk1yS3RXSjhnM1BHNnJicEp3Q3JRX20wclAtRlFwIn07PC9zY3JpcHQ+PHNjcmlwdCBkZWZlciBzcmM9InZlbmRvci96aXAtbGVnYWN5Lm1pbi5qcyI+PC9zY3JpcHQ+PHNjcmlwdCBkZWZlciBzcmM9Imh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9ucG0vZDNANy45LjAvZGlzdC9kMy5taW4uanMiPjwvc2NyaXB0PjxzY3JpcHQgZGVmZXIgc3JjPSJjbG91ZC1ydW50aW1lLmpzIj48L3NjcmlwdD48L2hlYWQ+PGJvZHk+PG1haW4gaWQ9ImxlZGdlci1hdXRoIiBhcmlhLWxpdmU9InBvbGl0ZSI+PC9tYWluPgo8ZGl2IGlkPSJmYW1pbHktbGVkZ2VyLWNvenktaG9tZSIgaGlkZGVuIGxhbmc9ImtvIiBhcmlhLWxhYmVsPSLsmrDrpqzsp5Eg6rCA6rOE67aAIMK3IOuxheyDkCDqsIDsoLjsmKTquLAiPgo8c2VjdGlvbiBhcmlhLWxhYmVsPSLtj6zqt7ztlZwg7Jqw66as7KeRIO2dkeuwsSDrlJTsnpDsnbgiPgo8ZGl2IGNsYXNzPSJmbC1wcm9kdWN0IiBkYXRhLXNraW49ImhvbWUiIGFyaWEtbGFiZWw9Iu2PrOq3vO2VnCDsmrDrpqzsp5EiPjxkaXYgY2xhc3M9ImZsLXdpbmRvdyI+PGhlYWRlciBjbGFzcz0iZmwtaGVhZGVyIj48L2hlYWRlcj48bmF2IGNsYXNzPSJmbC10b3BuYXYiIGFyaWEtbGFiZWw9IuuplOyduCDrqZTribQiPjwvbmF2PjxkaXYgY2xhc3M9ImZsLXdvcmsiPjxhc2lkZSBjbGFzcz0iZmwtc2lkZSIgYXJpYS1sYWJlbD0i66mU7J24IOuplOuJtCI+PC9hc2lkZT48bWFpbiBjbGFzcz0iZmwtbWFpbiI+PC9tYWluPjwvZGl2PjxuYXYgY2xhc3M9ImZsLWJvdHRvbW5hdiIgYXJpYS1sYWJlbD0i66mU7J24IOuplOuJtCI+PC9uYXY+PC9kaXY+PGRpYWxvZyBjbGFzcz0iZmwtZGlhbG9nIiBhcmlhLWxhYmVsPSLqsIDqs4TrtoAg7J6F66ClIOuwjyDqsIDsoLjsmKTquLAiPjwvZGlhbG9nPjwvZGl2Pgo8L3NlY3Rpb24+CgoKCgo8L2Rpdj4KCjwvYm9keT48L2h0bWw+Cg==')
           expected = {
           'index.html': '81503cb5231279b3c201cf5fc43bc38ac8275ac1a01b3856301d4745d8a9a231',
           'app.css': '04b0d4f2ab2627cee970c496a7dd721fe6c4929ffab1da26b55f53ed3302c566',
@@ -34,8 +35,11 @@ jobs:
           'vendor/zip.LICENSE': '1b7ebc8d7889ed25491484ab2b102370742ca6c0b26650a0c62cc2269b579b84',
           }
           for name, checksum in expected.items():
-              with urlopen(origin + name, timeout=30) as response:
-                  content = response.read(2000000)
+              if name == 'index.html':
+                  content = embedded_index
+              else:
+                  with urlopen(origin + name, timeout=30) as response:
+                      content = response.read(2000000)
               if hashlib.sha256(content).hexdigest() != checksum:
                   raise RuntimeError('Application asset verification failed: ' + name)
               target = Path('_site') / name
