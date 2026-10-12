@@ -32,7 +32,7 @@ jobs:
           with urlopen(request, timeout=30) as response:
               result = json.loads(response.read(2000000))
           archive = base64.b64decode(result['archive'], validate=True)
-          expected = 'b3667b6100c6fa7b9ea335bf3536901ffc31fc75345d3175dabbc7bf09cc40ec'
+          expected = 'c9b181719f2e48c2cf756f6df822925127c3f5bdab8d7aba1674da1257d811eb'
           if hashlib.sha256(archive).hexdigest() != expected:
               raise RuntimeError('Application bundle verification failed')
           names = {'index.html', 'app.css', 'ledger-view.js', 'cloud-runtime.js', 'vendor/zip-legacy.min.js', 'vendor/zip.LICENSE'}
